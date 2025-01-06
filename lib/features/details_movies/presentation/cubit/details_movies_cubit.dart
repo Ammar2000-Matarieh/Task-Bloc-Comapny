@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_company_app_new_2025/features/details_movies/data/models/model_details_movies.dart';
+import 'package:task_company_app_new_2025/features/details_movies/data/models/model_tv_details.dart';
 import 'package:task_company_app_new_2025/utils/constants/app_constants.dart';
 import 'package:http/http.dart' as http;
 part 'details_movies_state.dart';
@@ -38,6 +38,38 @@ class DetailsMoviesCubit extends Cubit<DetailsMoviesState> {
     } catch (e) {
       print("Exception: $e");
       emit(ErrorStateApiDetails(mess: "Error Fetching Movie Details"));
+    }
+  }
+
+  Future<void> fetchSeasonDetails(
+    int seriesId,
+  ) async {
+    final url = Uri.parse('${AppConstants.baseUrl}tv/$seriesId');
+
+    try {
+      final response = await http.get(
+        url,
+        headers: {
+          "Authorization": "Bearer ${AppConstants.apiKeyAuthorization}",
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = json.decode(response.body);
+
+        final tvDetailsData = TVModelsDetails.fromJson(data);
+
+        emit(LoadedStateApiDetailsTV(tvDetailsData));
+      } else {
+        emit(ErrorStateApiDetails(mess: "Error Fetching Movie Details"));
+
+        // If the server does not return a 200 response, throw an exception
+        throw Exception('Failed to load season details');
+      }
+    } catch (error) {
+      emit(ErrorStateApiDetails(mess: "Error Fetching Movie Details"));
+
+      throw Exception('Error fetching data: $error');
     }
   }
 }

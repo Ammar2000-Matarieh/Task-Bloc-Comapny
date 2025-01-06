@@ -58,13 +58,13 @@ class MoviesDetails {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     belongsToCollection = json['belongs_to_collection'] != null
-        ? new BelongsToCollection.fromJson(json['belongs_to_collection'])
+        ? BelongsToCollection.fromJson(json['belongs_to_collection'])
         : null;
     budget = json['budget'];
     if (json['genres'] != null) {
       genres = <Genres>[];
       json['genres'].forEach((v) {
-        genres!.add(new Genres.fromJson(v));
+        genres!.add(Genres.fromJson(v));
       });
     }
     homepage = json['homepage'];

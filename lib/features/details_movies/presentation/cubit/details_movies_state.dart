@@ -20,6 +20,15 @@ class LoadedStateApiDetails extends DetailsMoviesState {
   List<Object> get props => [movieDetails];
 }
 
+class LoadedStateApiDetailsTV extends DetailsMoviesState {
+  final TVModelsDetails modelTV;
+  const LoadedStateApiDetailsTV(
+    this.modelTV,
+  );
+  @override
+  List<Object> get props => [modelTV];
+}
+
 class ErrorStateApiDetails extends DetailsMoviesState {
   final String mess;
   const ErrorStateApiDetails({

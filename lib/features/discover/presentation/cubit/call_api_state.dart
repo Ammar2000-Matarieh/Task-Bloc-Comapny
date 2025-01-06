@@ -16,6 +16,9 @@ class LoadedStateApi extends CallApiState {
   const LoadedStateApi(
     this.modelMovies,
   );
+
+  @override
+  List<Object> get props => [modelMovies];
 }
 
 class ErrorStateApi extends CallApiState {
@@ -24,4 +27,7 @@ class ErrorStateApi extends CallApiState {
   const ErrorStateApi({
     required this.mess,
   });
+
+  @override
+  List<Object> get props => [mess];
 }

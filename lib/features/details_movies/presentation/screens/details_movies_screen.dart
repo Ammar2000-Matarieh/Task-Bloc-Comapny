@@ -8,6 +8,21 @@ class DetailsMoviesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          "Details Movies ",
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+        ),
+      ),
       body: BlocBuilder<DetailsMoviesCubit, DetailsMoviesState>(
         builder: (context, state) {
           if (state is DetailsMoviesLoading) {
