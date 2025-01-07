@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_company_app_new_2025/features/search/presentation/cubit/search_cubit.dart';
 
 class SearchScreen extends StatelessWidget {
+  const SearchScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,13 +20,14 @@ class SearchScreen extends StatelessWidget {
 }
 
 class SearchView extends StatefulWidget {
+  const SearchView({super.key});
+
   @override
-  _SearchViewState createState() => _SearchViewState();
+  State<SearchView> createState() => _SearchViewState();
 }
 
 class _SearchViewState extends State<SearchView> {
-  final TextEditingController _searchController = TextEditingController();
-
+  final _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Column(

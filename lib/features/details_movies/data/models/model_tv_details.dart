@@ -12,7 +12,7 @@ class TVModelsDetails {
   String? lastAirDate;
   LastEpisodeToAir? lastEpisodeToAir;
   String? name;
-  dynamic nextEpisodeToAir; // Adjust as per API structure
+  dynamic nextEpisodeToAir;
   List<Networks>? networks;
   int? numberOfEpisodes;
   int? numberOfSeasons;
@@ -67,52 +67,55 @@ class TVModelsDetails {
     this.voteCount,
   });
 
-  TVModelsDetails.fromJson(Map<String, dynamic> json) {
-    adult = json['adult'];
-    backdropPath = json['backdrop_path'];
-    createdBy = (json['created_by'] as List?)
-        ?.map((v) => CreatedBy.fromJson(v))
-        .toList();
-    episodeRunTime = json['episode_run_time']?.cast<int>();
-    firstAirDate = json['first_air_date'];
-    genres = (json['genres'] as List?)?.map((v) => Genres.fromJson(v)).toList();
-    homepage = json['homepage'];
-    id = json['id'];
-    inProduction = json['in_production'];
-    languages = json['languages']?.cast<String>();
-    lastAirDate = json['last_air_date'];
-    lastEpisodeToAir = json['last_episode_to_air'] != null
-        ? LastEpisodeToAir.fromJson(json['last_episode_to_air'])
-        : null;
-    name = json['name'];
-    nextEpisodeToAir =
-        json['next_episode_to_air']; // Use dynamic handling if needed
-    networks =
-        (json['networks'] as List?)?.map((v) => Networks.fromJson(v)).toList();
-    numberOfEpisodes = json['number_of_episodes'];
-    numberOfSeasons = json['number_of_seasons'];
-    originCountry = json['origin_country']?.cast<String>();
-    originalLanguage = json['original_language'];
-    originalName = json['original_name'];
-    overview = json['overview'];
-    popularity = json['popularity']?.toDouble();
-    posterPath = json['poster_path'];
-    productionCompanies = (json['production_companies'] as List?)
-        ?.map((v) => ProductionCompanies.fromJson(v))
-        .toList();
-    productionCountries = (json['production_countries'] as List?)
-        ?.map((v) => ProductionCountries.fromJson(v))
-        .toList();
-    seasons =
-        (json['seasons'] as List?)?.map((v) => Seasons.fromJson(v)).toList();
-    spokenLanguages = (json['spoken_languages'] as List?)
-        ?.map((v) => SpokenLanguages.fromJson(v))
-        .toList();
-    status = json['status'];
-    tagline = json['tagline'];
-    type = json['type'];
-    voteAverage = json['vote_average']?.toDouble();
-    voteCount = json['vote_count'];
+  factory TVModelsDetails.fromJson(Map<String, dynamic> json) {
+    return TVModelsDetails(
+      adult: json['adult'],
+      backdropPath: json['backdrop_path'],
+      createdBy: (json['created_by'] as List?)
+          ?.map((v) => CreatedBy.fromJson(v))
+          .toList(),
+      episodeRunTime: json['episode_run_time']?.cast<int>(),
+      firstAirDate: json['first_air_date'],
+      genres:
+          (json['genres'] as List?)?.map((v) => Genres.fromJson(v)).toList(),
+      homepage: json['homepage'],
+      id: json['id'],
+      inProduction: json['in_production'],
+      languages: json['languages']?.cast<String>(),
+      lastAirDate: json['last_air_date'],
+      lastEpisodeToAir: json['last_episode_to_air'] != null
+          ? LastEpisodeToAir.fromJson(json['last_episode_to_air'])
+          : null,
+      name: json['name'],
+      nextEpisodeToAir: json['next_episode_to_air'],
+      networks: (json['networks'] as List?)
+          ?.map((v) => Networks.fromJson(v))
+          .toList(),
+      numberOfEpisodes: json['number_of_episodes'],
+      numberOfSeasons: json['number_of_seasons'],
+      originCountry: json['origin_country']?.cast<String>(),
+      originalLanguage: json['original_language'],
+      originalName: json['original_name'],
+      overview: json['overview'],
+      popularity: json['popularity']?.toDouble(),
+      posterPath: json['poster_path'],
+      productionCompanies: (json['production_companies'] as List?)
+          ?.map((v) => ProductionCompanies.fromJson(v))
+          .toList(),
+      productionCountries: (json['production_countries'] as List?)
+          ?.map((v) => ProductionCountries.fromJson(v))
+          .toList(),
+      seasons:
+          (json['seasons'] as List?)?.map((v) => Seasons.fromJson(v)).toList(),
+      spokenLanguages: (json['spoken_languages'] as List?)
+          ?.map((v) => SpokenLanguages.fromJson(v))
+          .toList(),
+      status: json['status'],
+      tagline: json['tagline'],
+      type: json['type'],
+      voteAverage: json['vote_average']?.toDouble(),
+      voteCount: json['vote_count'],
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -181,16 +184,14 @@ class CreatedBy {
     profilePath = json['profile_path'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['credit_id'] = this.creditId;
-    data['name'] = this.name;
-    data['original_name'] = this.originalName;
-    data['gender'] = this.gender;
-    data['profile_path'] = this.profilePath;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'credit_id': creditId,
+        'name': name,
+        'original_name': originalName,
+        'gender': gender,
+        'profile_path': profilePath,
+      };
 }
 
 class Genres {
@@ -204,12 +205,10 @@ class Genres {
     name = json['name'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+      };
 }
 
 class LastEpisodeToAir {
@@ -227,20 +226,21 @@ class LastEpisodeToAir {
   int? showId;
   String? stillPath;
 
-  LastEpisodeToAir(
-      {this.id,
-      this.name,
-      this.overview,
-      this.voteAverage,
-      this.voteCount,
-      this.airDate,
-      this.episodeNumber,
-      this.episodeType,
-      this.productionCode,
-      this.runtime,
-      this.seasonNumber,
-      this.showId,
-      this.stillPath});
+  LastEpisodeToAir({
+    this.id,
+    this.name,
+    this.overview,
+    this.voteAverage,
+    this.voteCount,
+    this.airDate,
+    this.episodeNumber,
+    this.episodeType,
+    this.productionCode,
+    this.runtime,
+    this.seasonNumber,
+    this.showId,
+    this.stillPath,
+  });
 
   LastEpisodeToAir.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -258,23 +258,21 @@ class LastEpisodeToAir {
     stillPath = json['still_path'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['overview'] = this.overview;
-    data['vote_average'] = this.voteAverage;
-    data['vote_count'] = this.voteCount;
-    data['air_date'] = this.airDate;
-    data['episode_number'] = this.episodeNumber;
-    data['episode_type'] = this.episodeType;
-    data['production_code'] = this.productionCode;
-    data['runtime'] = this.runtime;
-    data['season_number'] = this.seasonNumber;
-    data['show_id'] = this.showId;
-    data['still_path'] = this.stillPath;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'overview': overview,
+        'vote_average': voteAverage,
+        'vote_count': voteCount,
+        'air_date': airDate,
+        'episode_number': episodeNumber,
+        'episode_type': episodeType,
+        'production_code': productionCode,
+        'runtime': runtime,
+        'season_number': seasonNumber,
+        'show_id': showId,
+        'still_path': stillPath,
+      };
 }
 
 class Networks {
@@ -292,14 +290,12 @@ class Networks {
     originCountry = json['origin_country'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['logo_path'] = this.logoPath;
-    data['name'] = this.name;
-    data['origin_country'] = this.originCountry;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'logo_path': logoPath,
+        'name': name,
+        'origin_country': originCountry,
+      };
 }
 
 class ProductionCompanies {
@@ -317,14 +313,12 @@ class ProductionCompanies {
     originCountry = json['origin_country'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['logo_path'] = this.logoPath;
-    data['name'] = this.name;
-    data['origin_country'] = this.originCountry;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'logo_path': logoPath,
+        'name': name,
+        'origin_country': originCountry,
+      };
 }
 
 class ProductionCountries {
@@ -338,12 +332,10 @@ class ProductionCountries {
     name = json['name'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['iso_3166_1'] = this.iso31661;
-    data['name'] = this.name;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'iso_3166_1': iso31661,
+        'name': name,
+      };
 }
 
 class Seasons {
@@ -377,18 +369,16 @@ class Seasons {
     voteAverage = json['vote_average'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['air_date'] = this.airDate;
-    data['episode_count'] = this.episodeCount;
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['overview'] = this.overview;
-    data['poster_path'] = this.posterPath;
-    data['season_number'] = this.seasonNumber;
-    data['vote_average'] = this.voteAverage;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'air_date': airDate,
+        'episode_count': episodeCount,
+        'id': id,
+        'name': name,
+        'overview': overview,
+        'poster_path': posterPath,
+        'season_number': seasonNumber,
+        'vote_average': voteAverage,
+      };
 }
 
 class SpokenLanguages {
@@ -404,11 +394,9 @@ class SpokenLanguages {
     name = json['name'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['english_name'] = this.englishName;
-    data['iso_639_1'] = this.iso6391;
-    data['name'] = this.name;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'english_name': englishName,
+        'iso_639_1': iso6391,
+        'name': name,
+      };
 }

@@ -27,16 +27,15 @@ class DetailsMoviesCubit extends Cubit<DetailsMoviesState> {
 
       if (res.statusCode == 200 || res.statusCode == 201) {
         final data = json.decode(res.body);
-        log("Response Data: $data"); // طباعة البيانات المستلمة
-        final movieDetails = MoviesDetails.fromJson(
-            data); // تحويل البيانات إلى نموذج MovieDetails
-        emit(LoadedStateApiDetails(movieDetails)); // إرسال الحالة مع التفاصيل
+        log("Response Data: $data");
+        final movieDetails = MoviesDetails.fromJson(data);
+        emit(LoadedStateApiDetails(movieDetails));
       } else {
-        print("Error: ${res.statusCode}");
+        log("Error: ${res.statusCode}");
         emit(ErrorStateApiDetails(mess: "Error Fetching Movie Details"));
       }
     } catch (e) {
-      print("Exception: $e");
+      log("Exception: $e");
       emit(ErrorStateApiDetails(mess: "Error Fetching Movie Details"));
     }
   }

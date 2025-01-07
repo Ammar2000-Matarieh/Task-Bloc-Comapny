@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_company_app_new_2025/features/favorites_user/presentation/cubit/favorites_user_cubit.dart';
 
 class FavoritesScreen extends StatelessWidget {
+  const FavoritesScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FavoritesUserCubit, FavoritesUserState>(
@@ -26,8 +28,9 @@ class FavoritesScreen extends StatelessWidget {
               }
 
               final result = movie.results![index];
-              if (result == null)
-                return SizedBox.shrink(); // Safeguard for null result
+              // if (result == null) {
+              //   return SizedBox.shrink();
+              // }
 
               return ListTile(
                 leading: result.posterPath != null

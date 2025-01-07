@@ -79,13 +79,13 @@ class MoviesDetails {
     if (json['production_companies'] != null) {
       productionCompanies = <ProductionCompanies>[];
       json['production_companies'].forEach((v) {
-        productionCompanies!.add(new ProductionCompanies.fromJson(v));
+        productionCompanies!.add(ProductionCompanies.fromJson(v));
       });
     }
     if (json['production_countries'] != null) {
       productionCountries = <ProductionCountries>[];
       json['production_countries'].forEach((v) {
-        productionCountries!.add(new ProductionCountries.fromJson(v));
+        productionCountries!.add(ProductionCountries.fromJson(v));
       });
     }
     releaseDate = json['release_date'];
@@ -94,7 +94,7 @@ class MoviesDetails {
     if (json['spoken_languages'] != null) {
       spokenLanguages = <SpokenLanguages>[];
       json['spoken_languages'].forEach((v) {
-        spokenLanguages!.add(new SpokenLanguages.fromJson(v));
+        spokenLanguages!.add(SpokenLanguages.fromJson(v));
       });
     }
     status = json['status'];
@@ -106,46 +106,53 @@ class MoviesDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['adult'] = this.adult;
-    data['backdrop_path'] = this.backdropPath;
-    if (this.belongsToCollection != null) {
-      data['belongs_to_collection'] = this.belongsToCollection!.toJson();
+    final Map<String, dynamic> data = {
+      'adult': adult,
+      'backdrop_path': backdropPath,
+      'budget': budget,
+      'homepage': homepage,
+      'id': id,
+      'imdb_id': imdbId,
+      'origin_country': originCountry,
+      'original_language': originalLanguage,
+      'original_title': originalTitle,
+      'overview': overview,
+      'popularity': popularity,
+      'poster_path': posterPath,
+      'release_date': releaseDate,
+      'revenue': revenue,
+      'runtime': runtime,
+      'status': status,
+      'tagline': tagline,
+      'title': title,
+      'video': video,
+      'vote_average': voteAverage,
+      'vote_count': voteCount,
+    };
+
+    if (belongsToCollection != null) {
+      data['belongs_to_collection'] = belongsToCollection!.toJson();
     }
-    data['budget'] = this.budget;
-    if (this.genres != null) {
-      data['genres'] = this.genres!.map((v) => v.toJson()).toList();
+
+    if (genres != null) {
+      data['genres'] = genres!.map((v) => v.toJson()).toList();
     }
-    data['homepage'] = this.homepage;
-    data['id'] = this.id;
-    data['imdb_id'] = this.imdbId;
-    data['origin_country'] = this.originCountry;
-    data['original_language'] = this.originalLanguage;
-    data['original_title'] = this.originalTitle;
-    data['overview'] = this.overview;
-    data['popularity'] = this.popularity;
-    data['poster_path'] = this.posterPath;
-    if (this.productionCompanies != null) {
+
+    if (productionCompanies != null) {
       data['production_companies'] =
-          this.productionCompanies!.map((v) => v.toJson()).toList();
+          productionCompanies!.map((v) => v.toJson()).toList();
     }
-    if (this.productionCountries != null) {
+
+    if (productionCountries != null) {
       data['production_countries'] =
-          this.productionCountries!.map((v) => v.toJson()).toList();
+          productionCountries!.map((v) => v.toJson()).toList();
     }
-    data['release_date'] = this.releaseDate;
-    data['revenue'] = this.revenue;
-    data['runtime'] = this.runtime;
-    if (this.spokenLanguages != null) {
+
+    if (spokenLanguages != null) {
       data['spoken_languages'] =
-          this.spokenLanguages!.map((v) => v.toJson()).toList();
+          spokenLanguages!.map((v) => v.toJson()).toList();
     }
-    data['status'] = this.status;
-    data['tagline'] = this.tagline;
-    data['title'] = this.title;
-    data['video'] = this.video;
-    data['vote_average'] = this.voteAverage;
-    data['vote_count'] = this.voteCount;
+
     return data;
   }
 }
@@ -165,14 +172,12 @@ class BelongsToCollection {
     backdropPath = json['backdrop_path'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['poster_path'] = this.posterPath;
-    data['backdrop_path'] = this.backdropPath;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'poster_path': posterPath,
+        'backdrop_path': backdropPath,
+      };
 }
 
 class Genres {
@@ -186,12 +191,10 @@ class Genres {
     name = json['name'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+      };
 }
 
 class ProductionCompanies {
@@ -209,14 +212,12 @@ class ProductionCompanies {
     originCountry = json['origin_country'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['logo_path'] = this.logoPath;
-    data['name'] = this.name;
-    data['origin_country'] = this.originCountry;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'logo_path': logoPath,
+        'name': name,
+        'origin_country': originCountry,
+      };
 }
 
 class ProductionCountries {
@@ -225,17 +226,17 @@ class ProductionCountries {
 
   ProductionCountries({this.iso31661, this.name});
 
-  ProductionCountries.fromJson(Map<String, dynamic> json) {
-    iso31661 = json['iso_3166_1'];
-    name = json['name'];
+  factory ProductionCountries.fromJson(Map<String, dynamic> json) {
+    return ProductionCountries(
+      iso31661: json['iso_3166_1'],
+      name: json['name'],
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['iso_3166_1'] = this.iso31661;
-    data['name'] = this.name;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'iso_3166_1': iso31661,
+        'name': name,
+      };
 }
 
 class SpokenLanguages {
@@ -251,11 +252,9 @@ class SpokenLanguages {
     name = json['name'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['english_name'] = this.englishName;
-    data['iso_639_1'] = this.iso6391;
-    data['name'] = this.name;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'english_name': englishName,
+        'iso_639_1': iso6391,
+        'name': name,
+      };
 }

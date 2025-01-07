@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task_company_app_new_2025/features/discover/presentation/screens/view_screen.dart';
+import 'package:task_company_app_new_2025/features/tv_views/presentation/screens/view_screen.dart';
 import 'package:task_company_app_new_2025/features/discover/presentation/screens/view_tv_screen.dart';
 import 'package:task_company_app_new_2025/features/discover/presentation/widgets/custom_bottom_appbar.dart';
 import 'package:task_company_app_new_2025/features/init_controller_tabbar/presentation/cubit/init_controller_tabbar_cubit.dart';
