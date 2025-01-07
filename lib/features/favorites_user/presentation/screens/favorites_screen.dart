@@ -12,7 +12,7 @@ class FavoritesScreen extends StatelessWidget {
         if (state is FavoritesLoading) {
           return Center(child: CircularProgressIndicator());
         } else if (state is FavoritesLoaded) {
-          final movies = state.favorites;
+          final movies = state.favoriteIds;
 
           if (movies.isEmpty) {
             return Center(child: Text('No favorites added yet!'));
@@ -21,39 +21,20 @@ class FavoritesScreen extends StatelessWidget {
           return ListView.builder(
             itemCount: movies.length,
             itemBuilder: (context, index) {
-              final movie = movies[index];
+              final movieId = movies[index];
 
-              if (movie.results == null || movie.results!.isEmpty) {
-                return SizedBox.shrink(); // Safeguard for null or empty results
-              }
-
-              final result = movie.results![index];
-              // if (result == null) {
-              //   return SizedBox.shrink();
-              // }
-
+              // Assuming you fetch the movie details using the movie ID
               return ListTile(
-                leading: result.posterPath != null
-                    ? Image.network(
-                        'https://image.tmdb.org/t/p/w500/${result.posterPath}',
-                        errorBuilder: (context, error, stackTrace) {
-                          return Icon(Icons.broken_image);
-                        },
-                      )
-                    : Icon(Icons.broken_image),
+                leading: Icon(Icons.movie), // Placeholder for movie poster
                 title: Text(
-                  result.title ?? 'No Title',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text(
-                  'Rating: ${result.voteAverage?.toStringAsFixed(1) ?? 'N/A'}',
-                ),
+                    'Movie ID: $movieId'), // Show movie ID (you should fetch title)
+                subtitle: Text('Favorite movie'),
                 trailing: IconButton(
                   icon: Icon(Icons.delete),
                   onPressed: () {
                     context
                         .read<FavoritesUserCubit>()
-                        .removeFavorite(result.id!);
+                        .toggleFavorite(movieId, false); // Remove favorite
                   },
                 ),
               );

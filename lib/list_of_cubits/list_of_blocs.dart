@@ -36,7 +36,15 @@ List<SingleChildWidget> blocsProviders = [
   ),
 
   BlocProvider(
-    create: (context) => FavoritesUserCubit()..loadFavorites(),
+    create: (context) => FavoritesUserCubit(0)..loadFavorites(),
   ),
+
+  BlocProvider(
+    create: (context) => FavoritesUserCubit(1)..fetchAccountDetails(),
+  ),
+
+  // BlocProvider(
+  //   create: (context) => FavoritesUserCubit()..(),
+  // ),
   // CallApiCubit()..getAllMoviesData(),
 ];

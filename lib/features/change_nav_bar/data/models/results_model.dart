@@ -2,7 +2,7 @@ class ResultsModel {
   bool? adult;
   String? backdropPath;
   List<int>? genreIds;
-  int? id;
+  int? id; // This is the ID you're trying to access
   String? originalLanguage;
   String? originalTitle;
   String? overview;
@@ -18,7 +18,7 @@ class ResultsModel {
     this.adult,
     this.backdropPath,
     this.genreIds,
-    this.id,
+    this.id, // Ensure this field is here
     this.originalLanguage,
     this.originalTitle,
     this.overview,
@@ -37,7 +37,7 @@ class ResultsModel {
       backdropPath: json['backdrop_path'],
       genreIds:
           json['genre_ids'] != null ? List<int>.from(json['genre_ids']) : null,
-      id: json['id'],
+      id: json['id'], // Make sure this is extracted from the JSON
       originalLanguage: json['original_language'],
       originalTitle: json['original_title'],
       overview: json['overview'],
@@ -55,7 +55,7 @@ class ResultsModel {
         'adult': adult,
         'backdrop_path': backdropPath,
         'genre_ids': genreIds,
-        'id': id,
+        'id': id, // Ensure this is included
         'original_language': originalLanguage,
         'original_title': originalTitle,
         'overview': overview,
